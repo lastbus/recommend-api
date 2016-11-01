@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bailian.dao.SourceDataMapper" >
+  <resultMap id="BaseResultMap" type="com.bailian.model.SourceData" >
+    <id column="souce_code" property="souceCode" jdbcType="VARCHAR" />
+    <result column="source_means" property="sourceMeans" jdbcType="VARCHAR" />
+    <result column="key_prefix" property="keyPrefix" jdbcType="VARCHAR" />
+    <result column="input_parameter" property="inputParameter" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    souce_code, source_means, key_prefix, input_parameter
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from source_data
+    where souce_code = #{souceCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from source_data
+    where souce_code = #{souceCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bailian.model.SourceData" >
+    insert into source_data (souce_code, source_means, key_prefix, 
+      input_parameter)
+    values (#{souceCode,jdbcType=VARCHAR}, #{sourceMeans,jdbcType=VARCHAR}, #{keyPrefix,jdbcType=VARCHAR}, 
+      #{inputParameter,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bailian.model.SourceData" >
+    insert into source_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="souceCode != null" >
+        souce_code,
+      </if>
+      <if test="sourceMeans != null" >
+        source_means,
+      </if>
+      <if test="keyPrefix != null" >
+        key_prefix,
+      </if>
+      <if test="inputParameter != null" >
+        input_parameter,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="souceCode != null" >
+        #{souceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceMeans != null" >
+        #{sourceMeans,jdbcType=VARCHAR},
+      </if>
+      <if test="keyPrefix != null" >
+        #{keyPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="inputParameter != null" >
+        #{inputParameter,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bailian.model.SourceData" >
+    update source_data
+    <set >
+      <if test="sourceMeans != null" >
+        source_means = #{sourceMeans,jdbcType=VARCHAR},
+      </if>
+      <if test="keyPrefix != null" >
+        key_prefix = #{keyPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="inputParameter != null" >
+        input_parameter = #{inputParameter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where souce_code = #{souceCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bailian.model.SourceData" >
+    update source_data
+    set source_means = #{sourceMeans,jdbcType=VARCHAR},
+      key_prefix = #{keyPrefix,jdbcType=VARCHAR},
+      input_parameter = #{inputParameter,jdbcType=VARCHAR}
+    where souce_code = #{souceCode,jdbcType=VARCHAR}
+  </update>
+  	<select id="selectAllSourceData" resultMap="BaseResultMap">
+    select * from source_data
+ 	</select>
+</mapper>

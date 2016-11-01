@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+
+<generatorConfiguration>
+	<!-- oracle 驱动包 -->
+	<classPathEntry location="d:\mysql-connector-java-5.1.28.jar" />
+
+	<!-- 配置数据源和生成的代码所存放的位置 -->
+	<context id="context1">
+		<commentGenerator>
+			<!-- 去除自动生成的注释 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+ 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://10.201.129.74:3306/recommend_system" userId="root"
+			password="bl.com" />
+<!-- 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/reommend_system" userId="root"
+			password="root" />
+ -->
+		<!-- 所生成的实体类的位置默认资源包src -->
+		<javaModelGenerator targetPackage="com.bailian.model"
+			targetProject="recommend" />
+		<!-- 所生成的sqlMap的影射文件的位置,默认资源包src -->
+		<sqlMapGenerator targetPackage="com.bailian.dao.mapper"
+			targetProject="recommend" />
+
+		<!-- 为哪些表生成代码 tableName:表名 schema:不用填写,其余属性是禁用例子查询的生成 -->
+
+
+		<table tableName="category_management" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false"></table>
+
+
+	</context>
+</generatorConfiguration>

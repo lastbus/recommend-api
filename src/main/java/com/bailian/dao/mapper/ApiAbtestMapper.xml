@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bailian.dao.ApiAbtestMapper" >
+  <resultMap id="BaseResultMap" type="com.bailian.model.ApiAbtest" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="method_code" property="methodCode" jdbcType="VARCHAR" />
+    <result column="api" property="api" jdbcType="VARCHAR" />
+    <result column="api_code" property="apiCode" jdbcType="INTEGER" />
+    <result column="api_name" property="apiName" jdbcType="VARCHAR" />
+    <result column="rank" property="rank" jdbcType="INTEGER" />
+    <result column="is_valid" property="isValid" jdbcType="INTEGER" />
+    <result column="flow_rate" property="flowRate" jdbcType="DOUBLE" />
+  </resultMap>
+  <insert id="insert" parameterType="com.bailian.model.ApiAbtest" >
+    insert into api_abtest (id, method_code, api, 
+      api_code, api_name, rank, 
+      is_valid, flow_rate)
+    values (#{id,jdbcType=INTEGER}, #{methodCode,jdbcType=VARCHAR}, #{api,jdbcType=VARCHAR}, 
+      #{apiCode,jdbcType=INTEGER}, #{apiName,jdbcType=VARCHAR}, #{rank,jdbcType=INTEGER}, 
+      #{isValid,jdbcType=INTEGER}, #{flowRate,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bailian.model.ApiAbtest" >
+    insert into api_abtest
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="methodCode != null" >
+        method_code,
+      </if>
+      <if test="api != null" >
+        api,
+      </if>
+      <if test="apiCode != null" >
+        api_code,
+      </if>
+      <if test="apiName != null" >
+        api_name,
+      </if>
+      <if test="rank != null" >
+        rank,
+      </if>
+      <if test="isValid != null" >
+        is_valid,
+      </if>
+      <if test="flowRate != null" >
+        flow_rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="methodCode != null" >
+        #{methodCode,jdbcType=VARCHAR},
+      </if>
+      <if test="api != null" >
+        #{api,jdbcType=VARCHAR},
+      </if>
+      <if test="apiCode != null" >
+        #{apiCode,jdbcType=INTEGER},
+      </if>
+      <if test="apiName != null" >
+        #{apiName,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null" >
+        #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="flowRate != null" >
+        #{flowRate,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectApiAbtestByApi"  resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select * from api_abtest
+    where is_valid = 1 and api = #{api,jdbcType=VARCHAR} order by rank asc
+ 	</select>
+</mapper>

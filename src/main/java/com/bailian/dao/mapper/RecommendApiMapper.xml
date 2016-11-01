@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bailian.dao.RecommendApiMapper" >
+  <resultMap id="BaseResultMap" type="com.bailian.model.RecommendApi" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="api" property="api" jdbcType="VARCHAR" />
+    <result column="api_name" property="apiName" jdbcType="VARCHAR" />
+    <result column="api_track" property="apiTrack" jdbcType="INTEGER" />
+    <result column="channel" property="channel" jdbcType="INTEGER" />
+    <result column="member_id" property="memberId" jdbcType="VARCHAR" />
+    <result column="cookie_id" property="cookieId" jdbcType="VARCHAR" />
+    <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
+    <result column="items" property="items" jdbcType="VARCHAR" />
+    <result column="paging" property="paging" jdbcType="INTEGER" />
+    <result column="page_size" property="pageSize" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.bailian.model.RecommendApi" >
+    insert into recommend_api (id, api, api_name, 
+      api_track, channel, member_id, 
+      cookie_id, goods_id, items, 
+      paging, page_size, num, 
+      updatetime)
+    values (#{id,jdbcType=INTEGER}, #{api,jdbcType=VARCHAR}, #{apiName,jdbcType=VARCHAR}, 
+      #{apiTrack,jdbcType=INTEGER}, #{channel,jdbcType=INTEGER}, #{memberId,jdbcType=VARCHAR}, 
+      #{cookieId,jdbcType=VARCHAR}, #{goodsId,jdbcType=VARCHAR}, #{items,jdbcType=VARCHAR}, 
+      #{paging,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bailian.model.RecommendApi" >
+    insert into recommend_api
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="api != null" >
+        api,
+      </if>
+      <if test="apiName != null" >
+        api_name,
+      </if>
+      <if test="apiTrack != null" >
+        api_track,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="cookieId != null" >
+        cookie_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="items != null" >
+        items,
+      </if>
+      <if test="paging != null" >
+        paging,
+      </if>
+      <if test="pageSize != null" >
+        page_size,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="api != null" >
+        #{api,jdbcType=VARCHAR},
+      </if>
+      <if test="apiName != null" >
+        #{apiName,jdbcType=VARCHAR},
+      </if>
+      <if test="apiTrack != null" >
+        #{apiTrack,jdbcType=INTEGER},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=INTEGER},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="cookieId != null" >
+        #{cookieId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="items != null" >
+        #{items,jdbcType=VARCHAR},
+      </if>
+      <if test="paging != null" >
+        #{paging,jdbcType=INTEGER},
+      </if>
+      <if test="pageSize != null" >
+        #{pageSize,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  	<select id="selectAllApi"  resultMap="BaseResultMap">
+    select * from recommend_api
+ 	</select>
+</mapper>

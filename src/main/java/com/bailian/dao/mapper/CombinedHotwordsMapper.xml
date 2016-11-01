@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bailian.dao.CombinedHotwordsMapper" >
+  <resultMap id="BaseResultMap" type="com.bailian.model.CombinedHotwords" >
+    <result column="seqNum" property="seqnum" jdbcType="INTEGER" />
+    <result column="pagetype" property="pagetype" jdbcType="VARCHAR" />
+    <result column="categoryId" property="categoryid" jdbcType="INTEGER" />
+    <result column="startDate" property="startdate" jdbcType="TIMESTAMP" />
+    <result column="endDate" property="enddate" jdbcType="TIMESTAMP" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="from" property="from" jdbcType="VARCHAR" />
+    <result column="iseffective" property="iseffective" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.bailian.model.CombinedHotwords" >
+    insert into combined_hotwords (seqNum, pagetype, categoryId, 
+      sta"src/main/java/com/bailian/dao/mapper/CombinedHotwordsMapper.xml"rtDate, endDate, url, 
+      keyword, channel, from, 
+      iseffective)
+    values (#{seqnum,jdbcType=INTEGER}, #{pagetype,jdbcType=VARCHAR}, #{categoryid,jdbcType=INTEGER}, 
+      #{startdate,jdbcType=TIMESTAMP}, #{enddate,jdbcType=TIMESTAMP}, #{url,jdbcType=VARCHAR}, 
+      #{keyword,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, #{from,jdbcType=VARCHAR}, 
+      #{iseffective,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bailian.model.CombinedHotwords" >
+    insert into combined_hotwords
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seqnum != null" >
+        seqNum,
+      </if>
+      <if test="pagetype != null" >
+        pagetype,
+      </if>
+      <if test="categoryid != null" >
+        categoryId,
+      </if>
+      <if test="startdate != null" >
+        startDate,
+      </if>
+      <if test="enddate != null" >
+        endDate,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="from != null" >
+        from,
+      </if>
+      <if test="iseffective != null" >
+        iseffective,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seqnum != null" >
+        #{seqnum,jdbcType=INTEGER},
+      </if>
+      <if test="pagetype != null" >
+        #{pagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryid != null" >
+        #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="from != null" >
+        #{from,jdbcType=VARCHAR},
+      </if>
+      <if test="iseffective != null" >
+        #{iseffective,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+   <select id="getAllHotwords"  resultMap="BaseResultMap">
+   SELECT * FROM combined_hotwords WHERE iseffective=1 and now() between startDate AND endDate ORDER BY seqNum asc	
+ </select>
+
+</mapper>

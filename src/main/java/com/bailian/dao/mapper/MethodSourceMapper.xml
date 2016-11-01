@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bailian.dao.MethodSourceMapper">
+  <resultMap id="BaseResultMap" type="com.bailian.model.MethodSource">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="method_code" jdbcType="VARCHAR" property="methodCode" />
+    <result column="source_code" jdbcType="VARCHAR" property="sourceCode" />
+    <result column="source_type" jdbcType="INTEGER" property="sourceType" />
+    <result column="rank" jdbcType="INTEGER" property="rank" />
+    <result column="proportion" jdbcType="REAL" property="proportion" />
+    <result column="is_valid" jdbcType="INTEGER" property="isValid" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+  </resultMap>
+ 	<select id="selectSoureByMethorCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from method_source
+    where method_code = #{methodCode,jdbcType=VARCHAR} and is_valid=1 order by rank asc
+ 	</select>
+ 	<select id="selectAllSource"  resultMap="BaseResultMap">
+    select * from method_source
+    where  is_valid=1 order by method_code,rank asc
+ 	</select>
+ 
+</mapper>

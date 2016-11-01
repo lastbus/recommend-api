@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bailian.dao.KeywordBlacklistMapper" >
+  <resultMap id="BaseResultMap" type="com.bailian.model.KeywordBlacklist" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="pageType" property="pageType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, keyword, channel, pageType
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from keyword_blacklist
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from keyword_blacklist
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bailian.model.KeywordBlacklist" >
+    insert into keyword_blacklist (id, keyword, channel, 
+      pageType)
+    values (#{id,jdbcType=INTEGER}, #{keyword,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, 
+      #{pageType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bailian.model.KeywordBlacklist" >
+    insert into keyword_blacklist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="pageType != null" >
+        pageType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="pageType != null" >
+        #{pageType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bailian.model.KeywordBlacklist" >
+    update keyword_blacklist
+    <set >
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="pageType != null" >
+        pageType = #{pageType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bailian.model.KeywordBlacklist" >
+    update keyword_blacklist
+    set keyword = #{keyword,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      pageType = #{pageType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+   <select id="getAllBlackList" resultMap="BaseResultMap">
+    select * from keyword_blacklist
+ 	</select>
+</mapper>

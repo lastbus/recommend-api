@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bailian.dao.CategoryManagementMapper" >
+  <resultMap id="BaseResultMap" type="com.bailian.model.CategoryManagement" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="category_sid" property="categorySid" jdbcType="VARCHAR" />
+    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="goods_num_display" property="goodsNumDisplay" jdbcType="INTEGER" />
+    <result column="channel" property="channel" jdbcType="INTEGER" />
+    <result column="api" property="api" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, category_sid, category_name, start_date, end_date, goods_num_display, channel, 
+    api
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from category_management
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from category_management
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bailian.model.CategoryManagement" >
+    insert into category_management (id, category_sid, category_name, 
+      start_date, end_date, goods_num_display, 
+      channel, api)
+    values (#{id,jdbcType=INTEGER}, #{categorySid,jdbcType=VARCHAR}, #{categoryName,jdbcType=VARCHAR}, 
+      #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, #{goodsNumDisplay,jdbcType=INTEGER}, 
+      #{channel,jdbcType=INTEGER}, #{api,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bailian.model.CategoryManagement" >
+    insert into category_management
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="categorySid != null" >
+        category_sid,
+      </if>
+      <if test="categoryName != null" >
+        category_name,
+      </if>
+      <if test="startDate != null" >
+        start_date,
+      </if>
+      <if test="endDate != null" >
+        end_date,
+      </if>
+      <if test="goodsNumDisplay != null" >
+        goods_num_display,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="api != null" >
+        api,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="categorySid != null" >
+        #{categorySid,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryName != null" >
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsNumDisplay != null" >
+        #{goodsNumDisplay,jdbcType=INTEGER},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=INTEGER},
+      </if>
+      <if test="api != null" >
+        #{api,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bailian.model.CategoryManagement" >
+    update category_management
+    <set >
+      <if test="categorySid != null" >
+        category_sid = #{categorySid,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryName != null" >
+        category_name = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null" >
+        start_date = #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        end_date = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsNumDisplay != null" >
+        goods_num_display = #{goodsNumDisplay,jdbcType=INTEGER},
+      </if>
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=INTEGER},
+      </if>
+      <if test="api != null" >
+        api = #{api,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bailian.model.CategoryManagement" >
+    update category_management
+    set category_sid = #{categorySid,jdbcType=VARCHAR},
+      category_name = #{categoryName,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=TIMESTAMP},
+      end_date = #{endDate,jdbcType=TIMESTAMP},
+      goods_num_display = #{goodsNumDisplay,jdbcType=INTEGER},
+      channel = #{channel,jdbcType=INTEGER},
+      api = #{api,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="getAllCategoryByApi"  resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select * from category_management
+    where  now() BETWEEN start_date AND end_date and  api = #{api,jdbcType=VARCHAR}
+ </select>
+  <select id="getAllCategories"  resultMap="BaseResultMap" >
+    select * from category_management
+    where  now() BETWEEN start_date AND end_date
+ </select>
+  
+</mapper>
